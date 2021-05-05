@@ -1,0 +1,39 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: unifi-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: unifi-controller
+  template:
+    metadata:
+      name: unifi-controller
+      labels:
+        name: unifi-controller
+    spec:
+      volumes:
+        - name: nfs-unifi
+          persistentVolumeClaim:
+            claimName: unifi
+      containers:
+        - name: unifi-controller
+          image: 'jacobalberty/unifi:6.1.71'
+          ports:
+            - containerPort: 3478
+              protocol: UDP
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8843
+              protocol: TCP
+            - containerPort: 8880
+              protocol: TCP
+            - containerPort: 6789
+              protocol: TCP
+          volumeMounts:
+            - name: nfs-unifi
+              mountPath: /unifi
+              subPath: unifi
