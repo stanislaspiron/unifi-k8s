@@ -20,6 +20,9 @@ kubectl apply -f pvc.yml
 kubectl apply -f service.yml
 ```
 
+Source : https://flores.eken.nl/running-unifi-controller-on-k8s/
+
+
 To adopt an AP, connect the APM with user : ubnt / password : ubnt 
 
 and execute following command:
