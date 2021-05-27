@@ -28,4 +28,4 @@ To adopt an AP, connect the APM with user : ubnt / password : ubnt
 and execute following command:
 
 ```
-set-inform http://192.168.1.2:8080/inform
+set-inform http://192.168.1.200:8080/inform
