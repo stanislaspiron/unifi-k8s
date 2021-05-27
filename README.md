@@ -2,7 +2,7 @@
 
 Before deploying UNFI Controller:
 - create a nfs [storage class](https://github.com/stanislaspiron/microk8s_awx/blob/main/nfs/README.md)
-- Install [metallb](https://github.com/stanislaspiron/microk8s_awx/blob/main/microk8s/dashboard_install.md)
+- Install [metallb](https://github.com/stanislaspiron/microk8s_awx/blob/main/microk8s/install_metallb.md)
 
 **Create the deployment**
 ```
