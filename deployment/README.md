@@ -1,7 +1,9 @@
 # Deploy UNIFI controller in kubernetes
 
 ## Description
-This replository contains Yaml Files to deploy UNIFI controller in Kubernetes cluster.
+This repository contains Yaml Files to deploy UNIFI controller in Kubernetes cluster.
+
+This deployment uses container image from [@jacobalberty](https://hub.docker.com/r/jacobalberty/unifi)
 
 ## Requirements
 This deployment requires following configuration:
