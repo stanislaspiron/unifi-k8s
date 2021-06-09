@@ -17,18 +17,18 @@ Update the service file with expected Metallb IP address.
 
 **Create the deployment**
 ```
-kubectl apply -f 01-deployment.yml
+kubectl apply -f deployment.yml
 ```
 
 
 **Create the Persistent Volume Claim**
 ```
-kubectl apply -f pvc.yml
+kubectl apply -f persistentVolumeClaim.yml
 ```
 
 **Create the service**
 ```
-kubectl apply -f service.yml
+kubectl apply -f services.yml
 ```
 
 Source : https://flores.eken.nl/running-unifi-controller-on-k8s/
