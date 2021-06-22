@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: unifi-ctrl
-          image: 'jacobalberty/unifi:6.2.25'
+          image: 'docker.io/jacobalberty/unifi:v6.2'
           ports:
             - containerPort: 3478
               protocol: UDP
