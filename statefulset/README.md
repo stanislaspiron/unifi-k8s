@@ -22,7 +22,7 @@ kubectl apply -f stateful-set.yml
 
 **Create the service**
 ```
-kubectl apply -f serviceis.yml
+kubectl apply -f services.yml
 ```
 
 Source : https://flores.eken.nl/running-unifi-controller-on-k8s/
