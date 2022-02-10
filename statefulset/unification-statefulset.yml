@@ -1,0 +1,106 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: unifi
+  labels:
+    name: home
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: unifi-ctrl
+  namespace: unifi
+spec:
+  serviceName: "unifi"
+  replicas: 1
+  selector:
+    matchLabels:
+      name: unifi-ctrl
+  template:
+    metadata:
+      name: unifi-ctrl
+      labels:
+        name: unifi-ctrl
+    spec:
+      containers:
+        - name: unifi-ctrl
+          image: 'docker.io/jacobalberty/unifi:v6.5'
+          ports:
+            - containerPort: 3478
+              protocol: UDP
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+            - containerPort: 8843
+              protocol: TCP
+            - containerPort: 8880
+              protocol: TCP
+            - containerPort: 6789
+              protocol: TCP
+          volumeMounts:
+            - name: unifi-ctrl
+              mountPath: /unifi
+              subPath: unifi
+  volumeClaimTemplates:
+  - metadata:
+      name: unifi-ctrl
+    spec:
+      storageClassName: "nfs-storageclass"
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: lb-unifi
+  namespace: unifi
+  annotations:
+    metallb.universe.tf/allow-shared-ip: 'true'
+spec:
+  ports:
+    - name: '8080'
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: '8443'
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+    - name: '8843'
+      protocol: TCP
+      port: 8843
+      targetPort: 8843
+    - name: '8880'
+      protocol: TCP
+      port: 8880
+      targetPort: 8880
+    - name: '6789'
+      protocol: TCP
+      port: 6789
+      targetPort: 6789
+  selector:
+    name: unifi-ctrl
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.4
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: lb-unifi-udp
+  annotations:
+    metallb.universe.tf/allow-shared-ip: 'true'
+spec:
+  ports:
+    - name: '3478'
+      protocol: UDP
+      port: 3478
+      targetPort: 3478
+  selector:
+    name: unifi-ctrl
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.4
