@@ -16,14 +16,9 @@ Update the service file with expected Metallb IP address.
 
 **Create the deployment**
 ```
-kubectl apply -f stateful-set.yml
+kubectl apply -f unifi-statefulset.yml
 ```
 
-
-**Create the service**
-```
-kubectl apply -f services.yml
-```
 
 Source : https://flores.eken.nl/running-unifi-controller-on-k8s/
 
